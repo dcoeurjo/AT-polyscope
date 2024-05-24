@@ -1,4 +1,4 @@
-project(dgtalpolyscopetemplate)
+project(AT-polyscope)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 set(CMAKE_CXX_STANDARD 11)
