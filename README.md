@@ -1,3 +1,2 @@
-# DGtalPolyscopeTemplate
+# AT-polyscope
 
-Template project with polyscope + DGtal (cgal,libigl,gmp) + CLI11
