@@ -64,8 +64,13 @@ void callback()
     
     trace.beginBlock("Gradient");
     PolygonalCalculus<SH3::RealPoint,SH3::RealVector> calculus(*primalSurface);
+    
+    
     std::vector<PolygonalCalculus<SH3::RealPoint,SH3::RealVector>::Vector> gradients;
     std::vector<PolygonalCalculus<SH3::RealPoint,SH3::RealVector>::Vector> cogradients;
+    std::vector<PolygonalCalculus<SH3::RealPoint,SH3::RealVector>::Vector> ugradients;
+    std::vector<PolygonalCalculus<SH3::RealPoint,SH3::RealVector>::Vector> ucogradients;
+    
     
     auto phiFace = [&](SH3::SurfaceMesh::Face f){
       Eigen::VectorXd ph(4);
@@ -85,9 +90,14 @@ void callback()
       PolygonalCalculus<SH3::RealPoint,SH3::RealVector>::Vector cograd = calculus.coGradient(f) * ph;
       gradients.push_back( grad.normalized() );
       cogradients.push_back( cograd.normalized() );
+      ugradients.push_back( grad );
+      ucogradients.push_back( cograd);
+      
     }
-    ps->addFaceVectorQuantity("gradient v",gradients);
-    ps->addFaceVectorQuantity("cogradient v",cogradients);
+    ps->addFaceVectorQuantity("norm-gradient v",gradients);
+    ps->addFaceVectorQuantity("norm-cogradient v",cogradients);
+    ps->addFaceVectorQuantity("gradient v",ugradients);
+    ps->addFaceVectorQuantity("cogradient v",ucogradients);
     trace.endBlock();
   }
 }
